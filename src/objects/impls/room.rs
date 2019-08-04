@@ -27,6 +27,7 @@ use crate::{
     pathfinder::CostMatrix,
     traits::{TryFrom, TryInto},
     ConversionError,
+    RoomVisual
 };
 
 simple_accessors! {
@@ -336,6 +337,10 @@ impl Room {
 
     pub fn name_local(&self) -> RoomName {
         js_unwrap!(@{self.as_ref()}.name)
+    }
+
+    pub fn room_visual(&self) -> RoomVisual {
+        js_unwrap_ref!(@{self.as_ref()}.roomVisual);
     }
 }
 
