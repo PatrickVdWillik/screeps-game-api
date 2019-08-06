@@ -45,50 +45,49 @@ impl RoomVisual {
     // missing constructor?
 
     pub fn room_name(self) -> str { 
-        js_unwrap! { @{self.as_ref()}.roomName }
+        js_unwrap! { @{self.as_ref()}.roomName } // This should probably be transformed into a LocalRoomName instance
     }
 
     pub fn line(&self, pos1: &T, pos2: &T, style: LineStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-
+        js_unwrap_ref!(@{self.as_ref()}.line(pos1, pos2, style))
     }
 
     pub fn circle(&self, pos: &T, style: CircleStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-
+        js_unwrap_ref!(@{self.as_ref()}.circle(pos, style))
     }
 
-    #[inline]
     pub fn rect(&self, pos: &T, width: u32, height: u32, style: PolyStyle) -> &Self     
     where
         T: ?Sized + HasPosition,
     {
-
+        js_unwrap_ref!(@{self.as_ref()}.rect(pos, width, height, style))
     }
 
     pub fn poly(&self, points: Vec<&T>, style: PolyStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-
+        js_unwrap_ref!(@{self.as_ref()}.poly(points, style)) // Do we need to do something with points?
     }
 
     pub fn text(&self, pos: &T, style: TextStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-
+        js_unwrap_ref!(@{self.as_ref()}.text(pos, style))
     }
 
     pub fn clear(&self) -> &Self {
-
+        js_unwrap_ref!(@{self.as_ref()}.clear())
     }
 
     pub fn size(&self): usize {
-
+        js_unwrap!(@{self.as_ref()}.size())
     }
 }
