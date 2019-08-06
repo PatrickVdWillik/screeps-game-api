@@ -44,43 +44,51 @@ pub struct TextStyle {
 impl RoomVisual {
     // missing constructor?
 
-    #[inline] // ???
-    pub fn room_name(self) -> Option<str> {
+    pub fn room_name(self) -> str { 
         js_unwrap! { @{self.as_ref()}.roomName }
     }
 
-    #[inline] // Replace RoomPosition with a where T?
-    pub fn line(self, pos1: RoomPosition, pos2: RoomPosition, style: LineStyle) -> Self {
+    pub fn line(&self, pos1: &T, pos2: &T, style: LineStyle) -> &Self 
+    where
+        T: ?Sized + HasPosition,
+    {
+
+    }
+
+    pub fn circle(&self, pos: &T, style: CircleStyle) -> &Self 
+    where
+        T: ?Sized + HasPosition,
+    {
 
     }
 
     #[inline]
-    pub fn circle(self, x: u32, y: u32, style: CircleStyle) -> Self {
+    pub fn rect(&self, pos: &T, width: u32, height: u32, style: PolyStyle) -> &Self     
+    where
+        T: ?Sized + HasPosition,
+    {
 
     }
 
-    #[inline]
-    pub fn rect(self, x: u32, y: u32, width: u32, height: u32, style: PolyStyle) -> Self {
+    pub fn poly(&self, points: Vec<&T>, style: PolyStyle) -> &Self 
+    where
+        T: ?Sized + HasPosition,
+    {
 
     }
 
-    #[inline]
-    pub fn poly(self, points: Vec<RoomPosition>, style: PolyStyle) -> Self {
+    pub fn text(&self, pos: &T, style: TextStyle) -> &Self 
+    where
+        T: ?Sized + HasPosition,
+    {
 
     }
 
-    #[inline]
-    pub fn text(self, pos: RoomPosition, style: TextStyle) -> Self {
+    pub fn clear(&self) -> &Self {
 
     }
 
-    #[inline]
-    pub fn clear(self) -> Self {
+    pub fn size(&self): usize {
 
-    }
-
-    #[inline]
-    pub fn size(self): usize {
-        
     }
 }
