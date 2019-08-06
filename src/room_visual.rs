@@ -52,14 +52,14 @@ impl RoomVisual {
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self.as_ref()}.line(pos1, pos2, style))
+        js_unwrap_ref!(@{self.as_ref()}.line(pos1, pos2, @{style.as_ref()}))
     }
 
     pub fn circle(&self, pos: &T, style: CircleStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self.as_ref()}.circle(pos, style))
+        js_unwrap_ref!(@{self.as_ref()}.circle(pos, @{style.as_ref()}))
     }
 
     pub fn rect(&self, pos: &T, width: u32, height: u32, style: PolyStyle) -> &Self     
@@ -73,14 +73,14 @@ impl RoomVisual {
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self.as_ref()}.poly(points, style)) // Do we need to do something with points?
+        js_unwrap_ref!(@{self.as_ref()}.poly(points, @{style.as_ref()})) // Do we need to do something with points?
     }
 
     pub fn text(&self, pos: &T, style: TextStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self.as_ref()}.text(pos, style))
+        js_unwrap_ref!(@{self.as_ref()}.text(pos, @{style.as_ref()}))
     }
 
     pub fn clear(&self) -> &Self {
