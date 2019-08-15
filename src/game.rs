@@ -17,6 +17,7 @@ pub mod map;
 pub mod market;
 pub mod shards;
 
+
 /// See [http://docs.screeps.com/api/#Game.constructionSites]
 ///
 /// [http://docs.screeps.com/api/#Game.constructionSites]: http://docs.screeps.com/api/#Game.constructionSites

@@ -22,12 +22,11 @@ use crate::{
     objects::{
         ConstructionSite, Creep, Flag, HasPosition, Mineral, Nuke, PowerCreep, Resource, Room,
         RoomTerrain, Source, Structure, StructureController, StructureStorage, StructureTerminal,
-        Tombstone,
+        Tombstone
     },
     pathfinder::CostMatrix,
     traits::{TryFrom, TryInto},
-    ConversionError,
-    RoomVisual
+    ConversionError
 };
 
 simple_accessors! {
@@ -339,9 +338,9 @@ impl Room {
         js_unwrap!(@{self.as_ref()}.name)
     }
 
-    pub fn room_visual(&self) -> RoomVisual {
-        js_unwrap_ref!(@{self.as_ref()}.roomVisual);
-    }
+    // pub fn room_visual(&self) -> RoomVisual {
+    //     js_unwrap_ref!(@{self.as_ref()}.roomVisual);
+    // }
 }
 
 impl PartialEq for Room {

@@ -32,6 +32,7 @@ pub mod objects;
 pub mod pathfinder;
 pub mod raw_memory;
 pub mod traits;
+pub mod room_visual;
 
 pub use stdweb::private::ConversionError;
 

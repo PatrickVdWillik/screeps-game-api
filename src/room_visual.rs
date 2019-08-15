@@ -1,93 +1,94 @@
-#[repr(transparent)]
+use crate::objects::HasPosition;
+use crate::macros::*;
+
 pub struct RoomVisual {
 }
 
-// Memory alignment?
 pub struct LineStyle {
     width: u32,
-    color: str,
+    color: Option<String>,
     opacity: f64,
-    line_style: str // Option? Enum?
+    line_style: Option<String> // Option? Enum?
 }
 
 // Memory alignment?
 pub struct CircleStyle {
     radius: f64,
-    fill: str, // Default value?
+    fill: Option<String>, // Default value?
     opacity: f64,
-    stroke: str, // Option? Enum?
+    stroke: Option<String>, // Option? Enum?
     stroke_width: f64,
-    line_style: str // Option? Enum?
+    line_style: Option<String> // Option? Enum?
 }
 
 // Memory alignment?
 pub struct PolyStyle {
-    fill: str, // Default value?
+    fill: Option<String>, // Default value?
     opacity: f64,
-    stroke: str, // Option? Enum?
+    stroke: Option<String>, // Option? Enum?
     stroke_width: f64,
-    line_style: str // Option? Enum?
+    line_style: Option<String> // Option? Enum?
 }
 
 // Memory alignment?
 pub struct TextStyle {
-    color: str,
-    font: str, // JS also support a number here, no idea how to solve that one.
-    stroke: str,
+    color: Option<String>,
+    font: Option<String>, // JS also support a number here, no idea how to solve that one.
+    stroke: Option<String>,
     stroke_width: f64,
-    background_color: str,
+    background_color: Option<String>,
     background_padding: f64,
-    align: str,
+    align: Option<String>,
     opacity: f64
 }
 
 impl RoomVisual {
     // missing constructor?
 
-    pub fn room_name(self) -> str { 
-        js_unwrap! { @{self.as_ref()}.roomName } // This should probably be transformed into a LocalRoomName instance
+    pub fn room_name(self) -> String { 
+        js_unwrap! { @{self}.roomName.unwrap() } // This should probably be transformed into a LocalRoomName instance
     }
 
-    pub fn line(&self, pos1: &T, pos2: &T, style: LineStyle) -> &Self 
+    // pub fn line<T>(&self, pos1: &T, pos2: &T, style: LineStyle) -> &Self 
+    // where
+    //     T: ?Sized + HasPosition,
+    // {
+    //     js_unwrap_ref!(@{self}.line(pos1, pos2, @{style}))
+    // }
+
+    // pub fn circle<T>(&self, pos: &T, style: CircleStyle) -> &Self 
+    // where
+    //     T: ?Sized + HasPosition,
+    // {
+    //     js_unwrap_ref!(@{self}.circle(pos, @{style}))
+    // }
+
+    // pub fn rect<T>(&self, pos: &T, width: u32, height: u32, style: PolyStyle) -> &Self     
+    // where
+    //     T: ?Sized + HasPosition,
+    // {
+    //     js_unwrap_ref!(@{self}.rect(pos, width, height, style))
+    // }
+
+    // pub fn poly<T>(&self, points: Vec<&T>, style: PolyStyle) -> &Self 
+    // where
+    //     T: ?Sized + HasPosition,
+    // {
+    //     js_unwrap_ref!(@{self}.poly(points, @{style})) // Do we need to do something with points?
+    // }
+
+    pub fn text<T>(&self, pos: &T, style: TextStyle) -> &Self 
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self.as_ref()}.line(pos1, pos2, @{style.as_ref()}))
-    }
-
-    pub fn circle(&self, pos: &T, style: CircleStyle) -> &Self 
-    where
-        T: ?Sized + HasPosition,
-    {
-        js_unwrap_ref!(@{self.as_ref()}.circle(pos, @{style.as_ref()}))
-    }
-
-    pub fn rect(&self, pos: &T, width: u32, height: u32, style: PolyStyle) -> &Self     
-    where
-        T: ?Sized + HasPosition,
-    {
-        js_unwrap_ref!(@{self.as_ref()}.rect(pos, width, height, style))
-    }
-
-    pub fn poly(&self, points: Vec<&T>, style: PolyStyle) -> &Self 
-    where
-        T: ?Sized + HasPosition,
-    {
-        js_unwrap_ref!(@{self.as_ref()}.poly(points, @{style.as_ref()})) // Do we need to do something with points?
-    }
-
-    pub fn text(&self, pos: &T, style: TextStyle) -> &Self 
-    where
-        T: ?Sized + HasPosition,
-    {
-        js_unwrap_ref!(@{self.as_ref()}.text(pos, @{style.as_ref()}))
+        js_unwrap_ref!(@{self}.text(pos, @{style}))
     }
 
     pub fn clear(&self) -> &Self {
-        js_unwrap_ref!(@{self.as_ref()}.clear())
+        js_unwrap_ref!(@{self}.clear())
     }
 
-    pub fn size(&self): usize {
-        js_unwrap!(@{self.as_ref()}.size())
+    pub fn size(&self) -> usize {
+        js_unwrap!(@{self}.size())
     }
 }
