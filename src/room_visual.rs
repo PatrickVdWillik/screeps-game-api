@@ -1,5 +1,6 @@
 use crate::objects::HasPosition;
 use crate::macros::*;
+use crate::local::RoomName;
 
 pub struct RoomVisual {
 }
@@ -43,7 +44,10 @@ pub struct TextStyle {
 }
 
 impl RoomVisual {
-    // missing constructor?
+    pub fn constructor(room_name: RoomName) -> Self {
+        js_unwrap!(RoomVisual(@{room_name}))
+        //js_unwrap!(new RoomVisual(@{room_name}))
+    }
 
     pub fn room_name(self) -> String { 
         js_unwrap! { @{self}.roomName.unwrap() } // This should probably be transformed into a LocalRoomName instance
