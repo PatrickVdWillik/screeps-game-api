@@ -1,9 +1,7 @@
-use crate::objects::HasPosition;
 use crate::macros::*;
 use crate::local::RoomName;
-
-pub struct RoomVisual {
-}
+use crate::objects::RoomVisual;
+use crate::objects::HasPosition;
 
 pub struct LineStyle {
     width: u32,
@@ -43,6 +41,8 @@ pub struct TextStyle {
     opacity: f64
 }
 
+js_serializable!(TextStyle);
+
 impl RoomVisual {
     pub fn constructor(room_name: RoomName) -> Self {
         js_unwrap!(RoomVisual(@{room_name}))
@@ -81,15 +81,15 @@ impl RoomVisual {
     //     js_unwrap_ref!(@{self}.poly(points, @{style})) // Do we need to do something with points?
     // }
 
-    pub fn text<T>(&self, pos: &T, style: TextStyle) -> &Self 
+    pub fn text<T>(&self, pos: &T, style: TextStyle) -> Self 
     where
         T: ?Sized + HasPosition,
     {
-        js_unwrap_ref!(@{self}.text(pos, @{style}))
+        js_unwrap!(@{self}.text(pos, @{style}))
     }
 
-    pub fn clear(&self) -> &Self {
-        js_unwrap_ref!(@{self}.clear())
+    pub fn clear(&self) -> Self {
+        js_unwrap!(@{self}.clear())
     }
 
     pub fn size(&self) -> usize {
